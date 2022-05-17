@@ -39,11 +39,9 @@ export default function App() {
       let isPhotoCaptured = data.uri != null;  
       
       uriCapturedPhoto = data.uri.toString();
-
       setCapturedPhoto(data.uri);
       setOpen(true);
 
-      console.log(capturedPhoto);
     }
   }
 
@@ -82,8 +80,11 @@ export default function App() {
         <FontAwesome name="camera" size={23} color="#FFF"></FontAwesome>
       </TouchableOpacity>
 
-      { uriCapturedPhoto && 
-        <Modal animationType="slide" transparent="false" visible={open}> 
+      { uriCapturedPhoto != null && 
+      
+      console.log('pika' + uriCapturedPhoto),
+      console.log(open),
+        <Modal animationType="slide" transparent="false" backgroundColor='green' visible={open}> 
           <View style={{flex: 1, justifyContent: 'center', alignItems:'center', margin: 20}}>
             <View style={{margin: 10, flexDirection: 'row'}}>
               <TouchableOpacity style={{ margin: 10 }} onPress={ ()=> { setOpen(false); }}>
