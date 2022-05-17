@@ -9,8 +9,9 @@ export default function App() {
   const camRef = useRef(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [capturedPhoto, setCapturedPhoto] = useState(null);
-  const [open, setOpen] = useState(false);
+  var [capturedPhoto, setCapturedPhoto] = useState(null);
+  var uriCapturedPhoto;
+  var [open, setOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -35,13 +36,19 @@ export default function App() {
 
     if (camRef){
       const data = await camRef.current.takePictureAsync();
+      let isPhotoCaptured = data.uri != null;  
+      
+      uriCapturedPhoto = data.uri.toString();
+
       setCapturedPhoto(data.uri);
       setOpen(true);
+
+      console.log(capturedPhoto);
     }
   }
 
   async function savePicture(){
-    const asset = await MediaLibrary.createAssetAsync(capturedPhoto)
+    const asset = await MediaLibrary.createAssetAsync(uriCapturedPhoto)
     .then(() => {
       alert('Salvo com Sucesso!');
     })
@@ -51,11 +58,15 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView>
-      <Camera style={styles.camera} type={type} ref={camRef}>
-        <View style={styles.buttonContainer}>
+    <SafeAreaView style={styles.container}>
+      <Camera style={{flex: 1}} type={type} ref={camRef}>
+        <View style={{flex: 1, backgroundColor: 'transparent', flexDirection: 'row'}} >
           <TouchableOpacity
-            style={styles.button}
+           style={{
+            position: 'absolute',
+            bottom: 20,
+            left: 20
+           }} 
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.back
@@ -63,15 +74,15 @@ export default function App() {
                   : Camera.Constants.Type.back
               );
             }}>
-            <Text style={styles.text}> Trocar </Text>
+            <Text style={{ fontSize: 23, marginBottom: 20, color: '#FFF'}}> Trocar </Text>
           </TouchableOpacity>
         </View>
       </Camera>
-      <TouchableOpacity onPress={takePicture} >
+      <TouchableOpacity style={styles.button} onPress={takePicture} >
         <FontAwesome name="camera" size={23} color="#FFF"></FontAwesome>
       </TouchableOpacity>
 
-      { capturedPhoto && 
+      { uriCapturedPhoto && 
         <Modal animationType="slide" transparent="false" visible={open}> 
           <View style={{flex: 1, justifyContent: 'center', alignItems:'center', margin: 20}}>
             <View style={{margin: 10, flexDirection: 'row'}}>
@@ -83,10 +94,26 @@ export default function App() {
               </TouchableOpacity>
             </View>
 
-            <Images style={{ width: '100%', height: 450, borderRadius: 20}} source={{ uri: capturedPhoto}} />
+            <Image style={{ width: '100%', height: 300, borderRadius: 20}} source={{ uri: uriCapturedPhoto}} />
           </View>
         </Modal>
       }
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#121212',
+    margin: 20,
+    borderRadius: 20,
+    height: 50,
+  }
+})
