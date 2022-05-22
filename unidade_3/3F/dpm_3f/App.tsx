@@ -12,6 +12,9 @@ import CodePushWrapper from './src/wrappers/CodePushWrapper'
 import getScreenAnimation, {SCREEN_ANIMATION} from './src/config/getScreenAnimation'
 import KeyboardWrapper from './components/KeyboardWrapper'
 
+// Exemplo obtido a partir do seguinte tutorial
+//https://www.npmjs.com/package/react-native-accelerometer-parallax/v/1.6.1
+
 enableScreens(false)
 const Stack = createStackNavigator()
 

@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
+// Exemplo obtido a partir do seguinte tutorial
+// https://github.com/react-native-maps/react-native-maps
+
 export default function App() {
 
     const [position, setPosition] = useState({
