@@ -9,9 +9,8 @@ export default function App() {
   const camRef = useRef(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  var [capturedPhoto, setCapturedPhoto] = useState(null);
-  var uriCapturedPhoto;
-  var [open, setOpen] = useState(false);
+  const [capturedPhoto, setCapturedPhoto] = useState(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -38,7 +37,6 @@ export default function App() {
       const data = await camRef.current.takePictureAsync();
       let isPhotoCaptured = data.uri != null;  
       
-      uriCapturedPhoto = data.uri.toString();
       setCapturedPhoto(data.uri);
       setOpen(true);
 
@@ -46,7 +44,7 @@ export default function App() {
   }
 
   async function savePicture(){
-    const asset = await MediaLibrary.createAssetAsync(uriCapturedPhoto)
+    const asset = await MediaLibrary.createAssetAsync(capturedPhoto)
     .then(() => {
       alert('Salvo com Sucesso!');
     })
@@ -80,11 +78,8 @@ export default function App() {
         <FontAwesome name="camera" size={23} color="#FFF"></FontAwesome>
       </TouchableOpacity>
 
-      { uriCapturedPhoto != null && 
-      
-      console.log('pika' + uriCapturedPhoto),
-      console.log(open),
-        <Modal animationType="slide" transparent="false" backgroundColor='green' visible={open}> 
+      { capturedPhoto && 
+        <Modal animationType="slide" backgroundColor='green' visible={open}> 
           <View style={{flex: 1, justifyContent: 'center', alignItems:'center', margin: 20}}>
             <View style={{margin: 10, flexDirection: 'row'}}>
               <TouchableOpacity style={{ margin: 10 }} onPress={ ()=> { setOpen(false); }}>
@@ -95,7 +90,7 @@ export default function App() {
               </TouchableOpacity>
             </View>
 
-            <Image style={{ width: '100%', height: 300, borderRadius: 20}} source={{ uri: uriCapturedPhoto}} />
+            <Image style={{ width: '100%', height: 300, borderRadius: 20}} source={{ uri: capturedPhoto}} />
           </View>
         </Modal>
       }
