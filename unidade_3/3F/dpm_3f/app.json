@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "examples",
+    "name": "dpm_3f",
     "slug": "examples",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
-    "icon": "./assets/icon.png",
+    "icon": "",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover"

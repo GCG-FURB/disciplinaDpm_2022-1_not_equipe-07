@@ -4,7 +4,6 @@ import * as React from 'react'
 
 import 'react-native-gesture-handler'
 import {enableScreens} from 'react-native-screens'
-import codePush from 'react-native-code-push'
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet'
 import {StatusBar} from 'expo-status-bar'
 
@@ -42,9 +41,4 @@ const App = () => {
   )
 }
 
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.MANUAL,
-  installMode: codePush.InstallMode.IMMEDIATE,
-}
-codePush.notifyAppReady()
-export default __DEV__ ? App : codePush(codePushOptions)(App)
+export default App
