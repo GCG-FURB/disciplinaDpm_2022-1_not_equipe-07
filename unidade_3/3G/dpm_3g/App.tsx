@@ -7,6 +7,10 @@ import {colors} from './src/theme/colors';
 import {FixedHeader} from './src/components/FixedHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// exemplo de GET de dados em API obtido do tutorial do youtube no link a seguir
+// https://www.youtube.com/watch?v=fO-b9BAIyeE&t=130s
+// Lógica para salvar implementada manualmente para se adequar ao exemplo do video.
+
 export default function App() {
   const KEY = "key-API-dados";
   const [list, setList] = useState<Episode[]>([]);

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+
+  function getTitulo() {
+    return "Hello World!";
+  }
+
+  const [titulo, setTitulo] = useState(getTitulo());
+
   return (
       <View style={styles.container}>
-        <Text>Hello World!</Text>
+        <Text>{ titulo }</Text>
       </View>
   );
 }

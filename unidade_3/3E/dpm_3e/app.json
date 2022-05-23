@@ -25,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.henriqueeichstadt.dpm_3e"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
